@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
 
-export default function Headlines() {
+export default function Busines() {
+
+    const { id } = useParams();
 
     const countries = [
         { label: 'AE' },
@@ -59,49 +61,54 @@ export default function Headlines() {
         { label: 'za' },
     ];
 
-
     const [news, setNews] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [countrySelect, setCountrySelect] = useState('US');
 
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${countrySelect}&apiKey=fca63b749f3645eba38309c8b8569349`);
+                const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${countrySelect}&category=${id}&apiKey=fca63b749f3645eba38309c8b8569349`);
                 const data = await response.json();
                 setNews(data.articles);
-                setLoading(true)
+                setLoading(false)
             } catch (error) {
                 console.error('Error fetching news:', error);
             }
         };
 
         fetchNews();
-    }, [news])
+    }, [news]);
+
     return (
         <>
             {loading ?
 
-                <div className='m-3'>
 
-                    <h1 className="text-2xl text-blue-700 font-bold mt-5 mb-5">🔥Top Headlines</h1>
+                <div className='h-screen flex items-center justify-center'>
+                    <span className="loading loading-bars loading-lg -mt-24"></span>
+                </div>
+
+                :
+
+                <div className='m-3'>
 
                     <details className="dropdown w-full">
                         <summary className="m-1 btn bg-slate-100">
-                            Select Country
+                            Select Country 
                             <img className="w-8 h-6" src={`https://flagsapi.com/${countrySelect.toUpperCase()}/flat/64.png`} />
                         </summary>
 
                         <ul className="flex flex-row justify-between menu dropdown-content z-[1] bg-white w-full">
                             {countries.map(country => (
-                                <li className=" w-14" key={country.label} onClick={() => setCountrySelect(country.label.toUpperCase())}>
+                                <li className=" w-14" key={country.label} onClick={() => setCountrySelect(country.label.toUpperCase())}> 
                                     <img className="" src={`https://flagsapi.com/${country.label.toUpperCase()}/flat/64.png`} />
                                 </li>
                             ))}
                         </ul>
                     </details>
 
-                    <div className='mt-8'>
+                    <div className=''>
                         <div>
 
                             {news.map((e, index) => (
@@ -118,12 +125,6 @@ export default function Headlines() {
 
                         </div>
                     </div>
-                </div>
-
-                :
-
-                <div className='h-screen flex items-center justify-center'>
-                    <span className="loading loading-bars loading-lg -mt-24"></span>
                 </div>
             }
         </>

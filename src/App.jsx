@@ -16,6 +16,7 @@ function App() {
         <NavbarBottom />
       </div> */}
 
+      <h1>hello world</h1>
 
     </>
   )

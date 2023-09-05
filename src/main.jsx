@@ -10,30 +10,24 @@ import NavbarTop from './pages/NavbarTop.jsx';
 import NavbarBottom from './pages/NavbarBottom.jsx';
 import Home from './pages/Home.jsx';
 import Headlines from './pages/Headlines.jsx';
-import { BrowserRouter,Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Business from './pages/Category.jsx';
+import Profile from './pages/profile.jsx';
+import Search from './pages/Search.jsx';
+import Signup from './pages/Signup.jsx';
 
-
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Home />,
-//   },
-//   {
-//     path: "/headlines",
-//     element: <Headlines />,
-//   },
-// ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <NavbarTop />
+    <NavbarTop /> 
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/headlines" element={<Headlines />} />
+      <Route path="/:id" element={<Business />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/result" element={<Search />} />
+      <Route path="/signup" element={<Signup />} />
     </Routes>
     <NavbarBottom />
   </BrowserRouter>
-  // <BrowserRouter>
-  //   <NavbarTop/>
-  // </BrowserRouter>
 )
