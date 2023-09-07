@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
+import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 
 export default function Busines() {
 
     const { id } = useParams();
+
+    const [showDetail, setShowDetail] = useState(false); //menampilkan detail berita yg dipilih
+    const [selectedNews, setSelectedNews] = useState(null); //isi detail berita yg dipilih
 
     const countries = [
         { label: 'AE' },
@@ -95,13 +102,13 @@ export default function Busines() {
 
                     <details className="dropdown w-full">
                         <summary className="m-1 btn bg-slate-100">
-                            Select Country 
+                            Select Country
                             <img className="w-8 h-6" src={`https://flagsapi.com/${countrySelect.toUpperCase()}/flat/64.png`} />
                         </summary>
 
                         <ul className="flex flex-row justify-between menu dropdown-content z-[1] bg-white w-full">
                             {countries.map(country => (
-                                <li className=" w-14" key={country.label} onClick={() => setCountrySelect(country.label.toUpperCase())}> 
+                                <li className=" w-14" key={country.label} onClick={() => setCountrySelect(country.label.toUpperCase())}>
                                     <img className="" src={`https://flagsapi.com/${country.label.toUpperCase()}/flat/64.png`} />
                                 </li>
                             ))}
@@ -111,8 +118,56 @@ export default function Busines() {
                     <div className=''>
                         <div>
 
-                            {news.map((e, index) => (
-                                <div className='flex items-center gap-4  p-2 my-5' key={index + 1}>
+                            {/* detail berita */}
+                            {showDetail &&
+                                <div className='container'>
+
+                                    <div className='z-50 h-full px-2 py-4 bg-white absolute top-0 start-0 end-0 bottom-0'>
+                                        <div className='mb-5 flex justify-between ' >
+                                            <span onClick={() => setShowDetail(false)}>
+                                                <ArrowBackIosIcon />
+                                            </span>
+                                            <span onClick={() => window.my_modal_3.showModal()}>
+                                                <MoreVertIcon />
+                                            </span>
+                                        </div>
+                                        <h1 className='font-bold text-2xl mb-5'>{selectedNews.title}</h1>
+                                        <img src={selectedNews.urlToImage} alt={selectedNews.title} className='object-cover w-fullrounded-md rounded-lg' />
+                                        <p className='mt-5 text-blue-700 italic text-sm'>{selectedNews.publishedAt}</p>
+                                        <p className='mt-5'>{selectedNews.description}</p>
+                                        <p className='mt-5 text-blue-700 font-bold'>{selectedNews.author}</p>
+                                    </div>
+
+                                    <dialog id="my_modal_3" className="modal">
+                                        <div className="modal-box">
+                                            <form method="dialog">
+                                                {/* if there is a button in form, it will close the modal */}
+                                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                            </form>
+                                            <p className="font-bold mb-2">
+                                                <span className='me-2'><ShareOutlinedIcon /></span>
+                                                <span>Share</span>
+                                            </p>
+                                            <p className="font-bold" onClick={() => console.log(selectedNews)}>
+                                                <span className='me-2'><BookmarkAddOutlinedIcon /></span>
+                                                <span>Bookmark</span>
+                                            </p>
+                                        </div>
+                                    </dialog>
+                                </div>
+                            }
+                            {/* tutup detail berita */}
+
+                            {!showDetail && (
+                                news.map((e, index) => (
+                                <div
+                                    className='flex items-center gap-4  p-2 my-5'
+                                    key={index + 1}
+                                    onClick={() => {
+                                        setSelectedNews(e); //menambahkan element yg diclick untuk detail
+                                        setShowDetail(true); //menampilkan detail
+                                    }}
+                                >
                                     <div className='w-9/12'>
                                         <a href="" className='text-xs text-blue-700 font-bold'>{e.source.name}</a>
                                         <p className='text-sm font-bold'>{e.title}</p>
@@ -121,7 +176,7 @@ export default function Busines() {
                                         <img src={e.urlToImage} alt={e.title} className='object-cover w-full h-full' />
                                     </div>
                                 </div>
-                            ))}
+                            )))}
 
                         </div>
                     </div>

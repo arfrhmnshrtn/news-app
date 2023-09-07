@@ -22,7 +22,7 @@ export default function NavbarBottom() {
                 <Link to={'/headlines'} className={active == 'search' ? 'text-blue-700' : ''} onClick={() => buttonActiveHandller('search')}>
                     <LocalFireDepartmentOutlinedIcon />
                 </Link>
-                <Link to={'/'} className={active == 'bookmark' ? 'text-blue-700' : ''} onClick={() => buttonActiveHandller('bookmark')}>
+                <Link to={'/bookmark'} className={active == 'bookmark' ? 'text-blue-700' : ''} onClick={() => buttonActiveHandller('bookmark')}>
                     <BookmarksOutlinedIcon />
                 </Link>
                 <Link to={'profile'} className={active == 'user' ? 'text-blue-700' : ''} onClick={() => buttonActiveHandller('user')}>

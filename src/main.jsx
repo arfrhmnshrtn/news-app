@@ -15,6 +15,7 @@ import Business from './pages/Category.jsx';
 import Profile from './pages/profile.jsx';
 import Search from './pages/Search.jsx';
 import Signup from './pages/Signup.jsx';
+import  Bookmark  from './pages/Bookmark.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -27,6 +28,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path="/profile" element={<Profile />} />
       <Route path="/result" element={<Search />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/bookmark" element={<Bookmark />} />
     </Routes>
     <NavbarBottom />
   </BrowserRouter>
