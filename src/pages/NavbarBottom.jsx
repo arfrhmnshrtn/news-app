@@ -12,6 +12,7 @@ export default function NavbarBottom() {
     function buttonActiveHandller(content) {
         setActive(content)
     }
+    
     return (
         <>
 

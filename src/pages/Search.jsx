@@ -37,6 +37,11 @@ export default function Search() {
 
 
                         {news == [] ?
+                            
+                            <h1>Kosong</h1>
+
+                            :
+
                             news.map((item, index) => (
                                 <div className='flex items-center gap-4  p-2 my-5' key={index + 1} >
                                     <div className='w-9/12'>
@@ -48,10 +53,6 @@ export default function Search() {
                                     </div>
                                 </div>
                             ))
-
-                            :
-
-                            <h1>Kosong</h1>
                         }
 
 

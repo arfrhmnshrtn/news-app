@@ -1,22 +1,35 @@
 import { useEffect, useState, createContext, useContext } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 
 
+const DataContext = createContext();
+
+
+
 export default function Home() {
     const [news, setNews] = useState([]); //isi berita terkini
-    const [currentNewsIndex, setCurrentNewsIndex] = useState(20); // Track the current news index
+    const [currentNewsIndex, setCurrentNewsIndex] = useState(50); // Track the current news index
     const [loading, setLoading] = useState(false); //loadingg
     const [showDetail, setShowDetail] = useState(false); //menampilkan detail berita yg dipilih
     const [selectedNews, setSelectedNews] = useState(null); //isi detail berita yg dipilih
     const [showAllNews, setShowAllNews] = useState(10);
     const [allNews, setAllNews] = useState(true);
 
+    // const { data, setData } = useContext(DataContext);
+    // const history = useHistory(); // Dapatkan objek history
 
 
+    // const sendDataToDestination = () => {
+    //     // Mengatur data sebelum menavigasi
+    //     setData(selectedNews);
+    //     // Navigasi ke halaman tujuan
+    //     // Misalnya, dengan menggunakan React Router
+    //     history.push('/bookmark');
+    // };
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -31,11 +44,12 @@ export default function Home() {
         };
 
         fetchNews();
-    }, [news]);
+    }, []);
 
 
     return (
         <>
+            {/* <DataContext.Provider value={{ selectedNews, setSelectedNews }}> */}
             {loading ?
 
                 <div className='m-3'>
@@ -107,7 +121,7 @@ export default function Home() {
                                                 <span className='me-2'><ShareOutlinedIcon /></span>
                                                 <span>Share</span>
                                             </p>
-                                            <p className="font-bold" onClick={() => console.log(selectedNews)}>
+                                            <p className="font-bold">
                                                 <span className='me-2'><BookmarkAddOutlinedIcon /></span>
                                                 <span>Bookmark</span>
                                             </p>
@@ -155,6 +169,7 @@ export default function Home() {
                     <span className="loading loading-bars loading-lg -mt-24"></span>
                 </div>
             }
+            {/* </DataContext.Provider> */}
         </>
     );
 }

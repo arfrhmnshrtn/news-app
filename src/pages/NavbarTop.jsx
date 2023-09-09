@@ -12,6 +12,7 @@ export default function NavbarTop() {
     const initialActiveLink = localStorage.getItem('activeLink') || 'All';
     const [activeLink, setActiveLink] = useState(initialActiveLink);
     const [hideNav, setHideNav] = useState(false);
+    const [checkSearchValue, setCheckSearchValue] = useState(false);
 
     const handleLinkClick = (category) => {
         setActiveLink(category);
@@ -22,20 +23,34 @@ export default function NavbarTop() {
     const navigate = useNavigate();
 
     const handleSearchChange = (e) => {
-
         setSearchValue(e.target.value);
 
     };
 
     const handleSearchSubmit = () => {
+        if (searchValue.trim() === '') {
+            // Menampilkan pesan kesalahan jika searchValue kosong
+            setCheckSearchValue(true)
+        } else {
+            // Navigasi ke hasil pencarian jika searchValue tidak kosong
             navigate(`/result?search=${searchValue}`);
+            setCheckSearchValue(false);
+        }
     };
 
     const handleSearchKeyPress = (e) => {
         if (e.key === 'Enter') {
-            handleSearchSubmit();
-            setHideNav(true)
+            if (searchValue.trim() === '') {
+                // Menampilkan pesan kesalahan jika searchValue kosong
+                setCheckSearchValue(true)
+            } else {
+                // Navigasi ke hasil pencarian jika searchValue tidak kosong
+                navigate(`/result?search=${searchValue}`);
+                setHideNav(true);
+                setCheckSearchValue(false);
+            }
         }
+
     };
 
     const location = useLocation(); // Perlu mengimpor useLocation dari react-router-dom
@@ -77,23 +92,28 @@ export default function NavbarTop() {
                 </div>
             </div>
 
-            <div className='w-full mb-5 px-2 relative'>
+            <div className='w-full px-2 relative'>
                 <input
                     type="text"
                     placeholder="Find interesting news"
                     className="input border-slate-200 rounded-full w-full focus:border-blue-700 focus:outline-none"
-                    value={searchValue}
+                    // value={searchValue}
                     onChange={handleSearchChange}
                     onKeyPress={handleSearchKeyPress}
                 />
+
                 <button className=' absolute end-8 top-0 bottom-0 flex items-center' onClick={handleSearchSubmit}>
                     <SearchIcon />
                 </button>
             </div>
 
+            {checkSearchValue && (
+                <h1 className='px-5 italic text-red-700 text-sm'>Kolom Pencarian Tidak Boleh Kosong!!</h1>
+            )}
+
             {/* navbar items bottom */}
             {!hideNav && (
-                <div className=' px-2'>
+                <div className='mt-5 px-2'>
                     <ul className='flex gap-4 overflow-x-scroll flex-nowrap items-start text-sm'>
                         <li className={activeLink === 'All' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('All')}>
                             <Link
