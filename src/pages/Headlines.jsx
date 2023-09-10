@@ -3,6 +3,7 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export default function Headlines() {
 
@@ -68,6 +69,8 @@ export default function Headlines() {
     const [countrySelect, setCountrySelect] = useState('US');
     const [showDetail, setShowDetail] = useState(false); //menampilkan detail berita yg dipilih
     const [selectedNews, setSelectedNews] = useState(null); //isi detail berita yg dipilih
+    const [titleBookmark, setTitleBookmark] = useState('Bookmark');
+    const [iconBookmark, setIconBookmark] = useState(<BookmarkAddOutlinedIcon />)
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -139,9 +142,30 @@ export default function Headlines() {
                                                 <span className='me-2'><ShareOutlinedIcon /></span>
                                                 <span>Share</span>
                                             </p>
-                                            <p className="font-bold" onClick={() => console.log(selectedNews)}>
-                                                <span className='me-2'><BookmarkAddOutlinedIcon /></span>
-                                                <span>Bookmark</span>
+                                            <p
+                                                className="font-bold"
+                                                onClick={() => {
+                                                    const existingData = JSON.parse(localStorage.getItem('selectedNews')) || [];
+                                                    const indexToRemove = existingData.findIndex(news => news.title === selectedNews.title);
+
+                                                    if (indexToRemove !== -1) {
+                                                        // Hapus item jika sudah ada
+                                                        existingData.splice(indexToRemove, 1);
+                                                        setTitleBookmark('Bookmark');
+                                                        setIconBookmark(<BookmarkAddOutlinedIcon />)
+
+                                                    } else {
+                                                        // Tambahkan item jika belum ada
+                                                        existingData.push(selectedNews);
+                                                        setTitleBookmark('Unbookmark')
+                                                        setIconBookmark(<BookmarkIcon />)
+                                                    }
+
+                                                    localStorage.setItem('selectedNews', JSON.stringify(existingData));
+                                                }}
+                                            >
+                                                <span className='me-2'>{iconBookmark}</span>
+                                                <span>{titleBookmark}</span>
                                             </p>
                                         </div>
                                     </dialog>

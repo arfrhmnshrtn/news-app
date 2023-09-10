@@ -7,11 +7,6 @@ import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import BookmarkRemoveOutlinedIcon from '@mui/icons-material/BookmarkRemoveOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
-
-const DataContext = createContext();
-
-
-
 export default function Home() {
     const [news, setNews] = useState([]); //isi berita terkini
     const [currentNewsIndex, setCurrentNewsIndex] = useState(50); // Track the current news index
