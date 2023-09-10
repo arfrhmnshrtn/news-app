@@ -1,9 +1,11 @@
-import { useEffect, useState, createContext, useContext } from 'react';
+import { useEffect, useState, createContext, useContext, } from 'react';
 import { Link } from 'react-router-dom';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import BookmarkRemoveOutlinedIcon from '@mui/icons-material/BookmarkRemoveOutlined';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 
 const DataContext = createContext();
@@ -18,18 +20,11 @@ export default function Home() {
     const [selectedNews, setSelectedNews] = useState(null); //isi detail berita yg dipilih
     const [showAllNews, setShowAllNews] = useState(10);
     const [allNews, setAllNews] = useState(true);
+    const [titleBookmark, setTitleBookmark] = useState('Bookmark');
+    const [iconBookmark, setIconBookmark] = useState(<BookmarkAddOutlinedIcon />)
 
-    // const { data, setData } = useContext(DataContext);
-    // const history = useHistory(); // Dapatkan objek history
 
 
-    // const sendDataToDestination = () => {
-    //     // Mengatur data sebelum menavigasi
-    //     setData(selectedNews);
-    //     // Navigasi ke halaman tujuan
-    //     // Misalnya, dengan menggunakan React Router
-    //     history.push('/bookmark');
-    // };
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -38,6 +33,10 @@ export default function Home() {
                 const data = await response.json();
                 setNews(data.articles);
                 setLoading(true)
+                if (!localStorage.getItem('selectedNews')) {
+                    // Jika belum ada data, buat array kosong dan simpan ke Local Storage
+                    localStorage.setItem('selectedNews', JSON.stringify([]));
+                }
             } catch (error) {
                 console.error('Error fetching news:', error);
             }
@@ -121,9 +120,30 @@ export default function Home() {
                                                 <span className='me-2'><ShareOutlinedIcon /></span>
                                                 <span>Share</span>
                                             </p>
-                                            <p className="font-bold">
-                                                <span className='me-2'><BookmarkAddOutlinedIcon /></span>
-                                                <span>Bookmark</span>
+                                            <p
+                                                className="font-bold"
+                                                onClick={() => {
+                                                    const existingData = JSON.parse(localStorage.getItem('selectedNews')) || [];
+                                                    const indexToRemove = existingData.findIndex(news => news.title === selectedNews.title);
+
+                                                    if (indexToRemove !== -1) {
+                                                        // Hapus item jika sudah ada
+                                                        existingData.splice(indexToRemove, 1);
+                                                        setTitleBookmark('Bookmark');
+                                                        setIconBookmark(<BookmarkAddOutlinedIcon/>)
+
+                                                    } else {
+                                                        // Tambahkan item jika belum ada
+                                                        existingData.push(selectedNews);
+                                                        setTitleBookmark('Unbookmark')
+                                                        setIconBookmark(<BookmarkIcon/>)
+                                                    }
+
+                                                    localStorage.setItem('selectedNews', JSON.stringify(existingData));
+                                                }}
+                                            >
+                                                <span className='me-2'>{iconBookmark}</span>
+                                                <span>{titleBookmark}</span>
                                             </p>
                                         </div>
                                     </dialog>
