@@ -45,9 +45,9 @@ export default function Home() {
             {/* <DataContext.Provider value={{ selectedNews, setSelectedNews }}> */}
             {loading ?
 
-                <div className='m-3'>
+                <div className='m-3 container mx-auto'>
                     {/* bagian banner utama */}
-                    <div className=''>
+                    <div className='cursor-pointer'>
                         {news.length > 0 && (
                             <div
                                 className="hero h-52 relative"
@@ -56,7 +56,7 @@ export default function Home() {
                                     setShowDetail(true);
                                 }}
                             >
-                                <div className="hero-blur absolute top-0 left-0 w-full h-full rounded-lg" style={{ backgroundImage: `url(${news[currentNewsIndex]?.urlToImage})`, filter: 'blur(1px)' }}></div>
+                                <div className="hero-blur absolute top-0 left-0 w-full h-full rounded-lg hover:opacity-90" style={{ backgroundImage: `url(${news[currentNewsIndex]?.urlToImage})`, filter: 'blur(1px)' }}></div>
                                 <div className="hero-content absolute bottom-0 text-white">
                                     <div className="max-w-md text-start">
                                         <h1 className='font-bold text-xl'>{news[currentNewsIndex].title}</h1>
@@ -86,19 +86,21 @@ export default function Home() {
 
                             {/* detail berita */}
                             {showDetail &&
-                                <div className='container'>
+                                <div className='container mx-auto'>
 
-                                    <div className='z-50 h-screen px-2 py-4 bg-white absolute top-0 start-0 end-0 bottom-auto'>
+                                    <div className='z-50 h-screen px-2 py-4 bg-white md:end-20 md:start-20 absolute top-0 bottom-auto'>
                                         <div className='mb-5 flex justify-between ' >
-                                            <span onClick={() => setShowDetail(false)}>
+                                            <span className='cursor-pointer' onClick={() => setShowDetail(false)}>
                                                 <ArrowBackIosIcon />
                                             </span>
-                                            <span onClick={() => window.my_modal_3.showModal()}>
+                                            <span className='cursor-pointer' onClick={() => window.my_modal_3.showModal()}>
                                                 <MoreVertIcon />
                                             </span>
                                         </div>
                                         <h1 className='font-bold text-2xl mb-5'>{selectedNews.title}</h1>
-                                        <img src={selectedNews.urlToImage} alt={selectedNews.title} className='object-cover w-fullrounded-md rounded-lg' />
+                                        <img
+                                            src={selectedNews.urlToImage} alt={selectedNews.title} className='object-cover w-full rounded-lg md:h-52 '
+                                        />
                                         <p className='mt-5 text-blue-700 italic text-sm'>{selectedNews.publishedAt}</p>
                                         <p className='mt-5'>{selectedNews.description}</p>
                                         <p className='mt-5 text-blue-700 font-bold'>{selectedNews.author}</p>
@@ -110,12 +112,12 @@ export default function Home() {
                                                 {/* if there is a button in form, it will close the modal */}
                                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                             </form>
-                                            <p className="font-bold mb-2">
+                                            <p className="font-bold mb-2 cursor-pointer hover:text-blue-700">
                                                 <span className='me-2'><ShareOutlinedIcon /></span>
                                                 <span>Share</span>
                                             </p>
                                             <p
-                                                className="font-bold"
+                                                className="font-bold cursor-pointer hover:text-blue-700"
                                                 onClick={() => {
                                                     const existingData = JSON.parse(localStorage.getItem('selectedNews')) || [];
                                                     const indexToRemove = existingData.findIndex(news => news.title === selectedNews.title);
@@ -150,7 +152,7 @@ export default function Home() {
                             {!showDetail && (
                                 news.slice(0, showAllNews).map((e, index) => (
                                     <div
-                                        className='flex items-center gap-4 p-2 my-5'
+                                        className='flex items-center gap-4 p-2 my-5 cursor-pointer hover:bg-slate-200'
                                         key={index + 1}
                                         onClick={() => {
                                             setSelectedNews(e); //menambahkan element yg diclick untuk detail

@@ -40,23 +40,27 @@ export default function Search() {
                     </div >
 
                     :
-                    <div>
+                    <div className="container mx-auto">
 
                         {/* detail berita */}
                         {showDetail &&
                             <div className='container'>
 
-                                <div className='z-50 h-screen px-2 py-4 bg-white absolute top-0 start-0 end-0 bottom-auto'>
+                                <div className='z-50 h-screen px-2 py-4 bg-white absolute top-0 md:start-20 md:end-20 bottom-auto'>
                                     <div className='mb-5 flex justify-between ' >
-                                        <span onClick={() => setShowDetail(false)}>
+                                        <span className="cursor-pointer" onClick={() => setShowDetail(false)}>
                                             <ArrowBackIosIcon />
                                         </span>
-                                        <span onClick={() => window.my_modal_3.showModal()}>
+                                        <span className="cursor-pointer" onClick={() => window.my_modal_3.showModal()}>
                                             <MoreVertIcon />
                                         </span>
                                     </div>
                                     <h1 className='font-bold text-2xl mb-5'>{selectedNews.title}</h1>
-                                    <img src={selectedNews.urlToImage} alt={selectedNews.title} className='object-cover w-fullrounded-md rounded-lg' />
+                                    <img
+                                        src={selectedNews.urlToImage}
+                                        alt={selectedNews.title}
+                                        className='object-cover w-full rounded-lg md:h-52'
+                                    />
                                     <p className='mt-5 text-blue-700 italic text-sm'>{selectedNews.publishedAt}</p>
                                     <p className='mt-5'>{selectedNews.description}</p>
                                     <p className='mt-5 text-blue-700 font-bold'>{selectedNews.author}</p>
@@ -68,12 +72,12 @@ export default function Search() {
                                             {/* if there is a button in form, it will close the modal */}
                                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                         </form>
-                                        <p className="font-bold mb-2">
+                                        <p className="font-bold mb-2 cursor-pointer hover:text-blue-700">
                                             <span className='me-2'><ShareOutlinedIcon /></span>
                                             <span>Share</span>
                                         </p>
                                         <p
-                                            className="font-bold"
+                                            className="font-bold cursor-pointer hover:text-blue-700"
                                             onClick={() => {
                                                 const existingData = JSON.parse(localStorage.getItem('selectedNews')) || [];
                                                 const indexToRemove = existingData.findIndex(news => news.title === selectedNews.title);
@@ -106,7 +110,7 @@ export default function Search() {
                         {!showDetail && (
                             news.map((item, index) => (
                                 <div
-                                    className='flex items-center gap-4  p-2 my-5'
+                                    className='flex items-center gap-4  p-2 my-5 cursor-pointer hover:bg-slate-100'
                                     key={index + 1}
                                     onClick={() => {
                                         setSelectedNews(item); //menambahkan element yg diclick untuk detail

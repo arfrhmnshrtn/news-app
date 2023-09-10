@@ -90,7 +90,7 @@ export default function Headlines() {
         <>
             {loading ?
 
-                <div className='m-3'>
+                <div className='m-3 container mx-auto'>
 
                     <h1 className="text-2xl text-blue-700 font-bold mt-5 mb-5">🔥Top Headlines</h1>
 
@@ -116,17 +116,19 @@ export default function Headlines() {
                             {showDetail &&
                                 <div className='container'>
 
-                                    <div className='z-50 h-full px-2 py-4 bg-white absolute top-0 start-0 end-0 bottom-0'>
+                                    <div className='z-50 h-full px-2 py-4 bg-white absolute top-0 md:end-20 md:start-20 bottom-0'>
                                         <div className='mb-5 flex justify-between ' >
-                                            <span onClick={() => setShowDetail(false)}>
+                                            <span className="cursor-pointer" onClick={() => setShowDetail(false)}>
                                                 <ArrowBackIosIcon />
                                             </span>
-                                            <span onClick={() => window.my_modal_3.showModal()}>
+                                            <span className="cursor-pointer" onClick={() => window.my_modal_3.showModal()}>
                                                 <MoreVertIcon />
                                             </span>
                                         </div>
                                         <h1 className='font-bold text-2xl mb-5'>{selectedNews.title}</h1>
-                                        <img src={selectedNews.urlToImage} alt={selectedNews.title} className='object-cover w-fullrounded-md rounded-lg' />
+                                        <img
+                                            src={selectedNews.urlToImage} alt={selectedNews.title} className='object-cover w-full rounded-lg md:h-52'
+                                        />
                                         <p className='mt-5 text-blue-700 italic text-sm'>{selectedNews.publishedAt}</p>
                                         <p className='mt-5'>{selectedNews.description}</p>
                                         <p className='mt-5 text-blue-700 font-bold'>{selectedNews.author}</p>
@@ -138,12 +140,12 @@ export default function Headlines() {
                                                 {/* if there is a button in form, it will close the modal */}
                                                 <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                                             </form>
-                                            <p className="font-bold mb-2">
+                                            <p className="font-bold mb-2 hover:text-blue-700 cursor-pointer">
                                                 <span className='me-2'><ShareOutlinedIcon /></span>
                                                 <span>Share</span>
                                             </p>
                                             <p
-                                                className="font-bold"
+                                                className="font-bold hover:text-blue-700 cursor-pointer"
                                                 onClick={() => {
                                                     const existingData = JSON.parse(localStorage.getItem('selectedNews')) || [];
                                                     const indexToRemove = existingData.findIndex(news => news.title === selectedNews.title);
@@ -176,7 +178,7 @@ export default function Headlines() {
                             {!showDetail && (
                                 news.map((e, index) => (
                                     <div
-                                        className='flex items-center gap-4  p-2 my-5'
+                                        className='flex items-center gap-4  p-2 my-5 cursor-pointer hover:bg-slate-100'
                                         key={index + 1}
                                         onClick={() => {
                                             setSelectedNews(e); //menambahkan element yg diclick untuk detail

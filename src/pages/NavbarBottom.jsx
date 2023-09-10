@@ -16,7 +16,7 @@ export default function NavbarBottom() {
     return (
         <>
 
-            <div className="btm-nav">
+            <div className="btm-nav container mx-auto md:bg-slate-100">
                 <Link to={'/'} className={active == 'home' ? 'text-blue-700' : ''} onClick={() => buttonActiveHandller('home')}>
                     <HomeOutlinedIcon />
                 </Link>

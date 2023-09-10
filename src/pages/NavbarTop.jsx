@@ -80,113 +80,114 @@ export default function NavbarTop() {
 
     return (
         <>
-            <div>
-                <div className="flex justify-between  px-3 py-4 mt-3 relative">
-                    <div>
-                        <a href="" className='font-bold italic text-xl
+            <div className='container mx-auto'>
+                <div>
+                    <div className="flex justify-between  px-3 py-4 mt-3 relative">
+                        <div>
+                            <a href="" className='font-bold italic text-xl
                         '>{hour}, Arief👋</a>
-                    </div>
-                    <div>
-                        <NotificationsNoneOutlinedIcon />
+                        </div>
+                        <div>
+                            <NotificationsNoneOutlinedIcon />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div className='w-full px-2 relative'>
-                <input
-                    type="text"
-                    placeholder="Find interesting news"
-                    className="input border-slate-200 rounded-full w-full focus:border-blue-700 focus:outline-none"
-                    // value={searchValue}
-                    onChange={handleSearchChange}
-                    onKeyPress={handleSearchKeyPress}
-                />
+                <div className='w-full px-2 relative'>
+                    <input
+                        type="text"
+                        placeholder="Find interesting news"
+                        className="input border-slate-200 rounded-full w-full focus:border-blue-700 focus:outline-none"
+                        // value={searchValue}
+                        onChange={handleSearchChange}
+                        onKeyPress={handleSearchKeyPress}
+                    />
 
-                <button className=' absolute end-8 top-0 bottom-0 flex items-center' onClick={handleSearchSubmit}>
-                    <SearchIcon />
-                </button>
-            </div>
-
-            {checkSearchValue && (
-                <h1 className='px-5 italic text-red-700 text-sm'>Kolom Pencarian Tidak Boleh Kosong!!</h1>
-            )}
-
-            {/* navbar items bottom */}
-            {!hideNav && (
-                <div className='mt-5 px-2'>
-                    <ul className='flex gap-4 overflow-x-scroll flex-nowrap items-start text-sm'>
-                        <li className={activeLink === 'All' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('All')}>
-                            <Link
-                                to='/'
-                                className=''
-
-                            >
-                                For<span className='ms-1'>You</span>
-                            </Link>
-                        </li>
-                        <li className={activeLink === 'business' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('business')}>
-                            <Link
-                                to={'business'}
-                            >
-                                Business
-                            </Link>
-                        </li>
-                        <li className={activeLink === 'entertaiment' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('entertaiment')}>
-                            <Link
-                                to={'entertainment'}
-                            >
-                                Entertainment
-                            </Link>
-                        </li>
-                        <li className={activeLink === 'general' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('general')}>
-                            <Link
-                                to={'general'}
-                            >
-                                General
-                            </Link>
-                        </li>
-
-
-                        <li className={activeLink === 'health' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('health')}>
-                            <Link
-                                to={'health'}
-                            >
-                                Health
-                            </Link>
-                        </li>
-
-
-                        <li className={activeLink === 'science' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('science')}>
-                            <Link
-                                to={'science'}
-                            >
-                                Science
-                            </Link>
-                        </li>
-
-
-                        <li className={activeLink === 'sports' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('sports')}>
-                            <Link
-                                to={'sports'}
-                            >
-                                Sports
-                            </Link>
-                        </li>
-
-
-                        <li className={activeLink === 'technology' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('technology')}>
-                            <Link
-                                to={'technology'}
-                            >
-                                Technology
-                            </Link>
-                        </li>
-                    </ul>
-
+                    <button className=' absolute end-8 top-0 bottom-0 flex items-center' onClick={handleSearchSubmit}>
+                        <SearchIcon />
+                    </button>
                 </div>
-            )}
+
+                {checkSearchValue && (
+                    <h1 className='px-5 italic text-red-700 text-sm'>Kolom Pencarian Tidak Boleh Kosong!!</h1>
+                )}
+
+                {/* navbar items bottom */}
+                {!hideNav && (
+                    <div className='mt-5 px-2'>
+                        <ul className='flex gap-4 overflow-x-scroll flex-nowrap items-start text-sm'>
+                            <li className={activeLink === 'All' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('All')}>
+                                <Link
+                                    to='/'
+                                    className=''
+
+                                >
+                                    For<span className='ms-1'>You</span>
+                                </Link>
+                            </li>
+                            <li className={activeLink === 'business' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('business')}>
+                                <Link
+                                    to={'business'}
+                                >
+                                    Business
+                                </Link>
+                            </li>
+                            <li className={activeLink === 'entertaiment' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('entertaiment')}>
+                                <Link
+                                    to={'entertainment'}
+                                >
+                                    Entertainment
+                                </Link>
+                            </li>
+                            <li className={activeLink === 'general' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('general')}>
+                                <Link
+                                    to={'general'}
+                                >
+                                    General
+                                </Link>
+                            </li>
 
 
+                            <li className={activeLink === 'health' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('health')}>
+                                <Link
+                                    to={'health'}
+                                >
+                                    Health
+                                </Link>
+                            </li>
+
+
+                            <li className={activeLink === 'science' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('science')}>
+                                <Link
+                                    to={'science'}
+                                >
+                                    Science
+                                </Link>
+                            </li>
+
+
+                            <li className={activeLink === 'sports' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('sports')}>
+                                <Link
+                                    to={'sports'}
+                                >
+                                    Sports
+                                </Link>
+                            </li>
+
+
+                            <li className={activeLink === 'technology' ? 'bg-blue-700 text-white font-bold px-5 py-1 rounded-full ' : 'bg-slate-200 px-5 py-1 rounded-full w-full'} onClick={() => handleLinkClick('technology')}>
+                                <Link
+                                    to={'technology'}
+                                >
+                                    Technology
+                                </Link>
+                            </li>
+                        </ul>
+
+                    </div>
+                )}
+
+            </div>
         </>
     )
 }
