@@ -4,7 +4,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
-import BookmarkRemoveOutlinedIcon from '@mui/icons-material/BookmarkRemoveOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export default function Home() {

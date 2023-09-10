@@ -4,14 +4,11 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 export default function Busines() {
 
     const { id } = useParams();
-
-    const [showDetail, setShowDetail] = useState(false); //menampilkan detail berita yg dipilih
-    const [selectedNews, setSelectedNews] = useState(null); //isi detail berita yg dipilih
-
     const countries = [
         { label: 'AE' },
         { label: 'AR' },
@@ -68,9 +65,13 @@ export default function Busines() {
         { label: 'za' },
     ];
 
+    const [showDetail, setShowDetail] = useState(false); //menampilkan detail berita yg dipilih
+    const [selectedNews, setSelectedNews] = useState(null); //isi detail berita yg dipilih
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [countrySelect, setCountrySelect] = useState('US');
+    const [titleBookmark, setTitleBookmark] = useState('Bookmark');
+    const [iconBookmark, setIconBookmark] = useState(<BookmarkAddOutlinedIcon />)
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -148,9 +149,30 @@ export default function Busines() {
                                                 <span className='me-2'><ShareOutlinedIcon /></span>
                                                 <span>Share</span>
                                             </p>
-                                            <p className="font-bold" onClick={() => console.log(selectedNews)}>
-                                                <span className='me-2'><BookmarkAddOutlinedIcon /></span>
-                                                <span>Bookmark</span>
+                                            <p
+                                                className="font-bold"
+                                                onClick={() => {
+                                                    const existingData = JSON.parse(localStorage.getItem('selectedNews')) || [];
+                                                    const indexToRemove = existingData.findIndex(news => news.title === selectedNews.title);
+
+                                                    if (indexToRemove !== -1) {
+                                                        // Hapus item jika sudah ada
+                                                        existingData.splice(indexToRemove, 1);
+                                                        setTitleBookmark('Bookmark');
+                                                        setIconBookmark(<BookmarkAddOutlinedIcon />)
+
+                                                    } else {
+                                                        // Tambahkan item jika belum ada
+                                                        existingData.push(selectedNews);
+                                                        setTitleBookmark('Unbookmark')
+                                                        setIconBookmark(<BookmarkIcon />)
+                                                    }
+
+                                                    localStorage.setItem('selectedNews', JSON.stringify(existingData));
+                                                }}
+                                            >
+                                                <span className='me-2'>{iconBookmark}</span>
+                                                <span>{titleBookmark}</span>
                                             </p>
                                         </div>
                                     </dialog>
@@ -160,23 +182,23 @@ export default function Busines() {
 
                             {!showDetail && (
                                 news.map((e, index) => (
-                                <div
-                                    className='flex items-center gap-4  p-2 my-5'
-                                    key={index + 1}
-                                    onClick={() => {
-                                        setSelectedNews(e); //menambahkan element yg diclick untuk detail
-                                        setShowDetail(true); //menampilkan detail
-                                    }}
-                                >
-                                    <div className='w-9/12'>
-                                        <a href="" className='text-xs text-blue-700 font-bold'>{e.source.name}</a>
-                                        <p className='text-sm font-bold'>{e.title}</p>
+                                    <div
+                                        className='flex items-center gap-4  p-2 my-5'
+                                        key={index + 1}
+                                        onClick={() => {
+                                            setSelectedNews(e); //menambahkan element yg diclick untuk detail
+                                            setShowDetail(true); //menampilkan detail
+                                        }}
+                                    >
+                                        <div className='w-9/12'>
+                                            <a href="" className='text-xs text-blue-700 font-bold'>{e.source.name}</a>
+                                            <p className='text-sm font-bold'>{e.title}</p>
+                                        </div>
+                                        <div className='bg-slate-300 object-cover' style={{ width: '200px', height: '100px' }}>
+                                            <img src={e.urlToImage} alt={e.title} className='object-cover w-full h-full' />
+                                        </div>
                                     </div>
-                                    <div className='bg-slate-300 object-cover' style={{ width: '200px', height: '100px' }}>
-                                        <img src={e.urlToImage} alt={e.title} className='object-cover w-full h-full' />
-                                    </div>
-                                </div>
-                            )))}
+                                )))}
 
                         </div>
                     </div>

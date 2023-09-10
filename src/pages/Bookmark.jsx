@@ -3,7 +3,6 @@ import { useState } from "react";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import BookmarkRemoveOutlinedIcon from '@mui/icons-material/BookmarkRemoveOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 
@@ -76,36 +75,49 @@ export default function Boomark() {
             {/* tutup detail berita */}
 
             <div>
-                <h1 className="text-center mt-5 text-2xl font-bold italic"><BookmarkIcon/>Bookmark</h1>
-                {checkSelectedDataNews ?
+                <h1 className="text-center mt-5 text-2xl font-bold italic">
+                    <BookmarkIcon /> Bookmark
+                </h1>
+                {checkSelectedDataNews ? (
                     <div className="container h-screen flex items-center justify-center font-bold">
-                        <h1 className="text-center text-sm -mt-20 italic">Bookmark Kosong Bangg!</h1>
+                        <h1 className="text-center text-sm -mt-20 italic">
+                            Bookmark Kosong Bangg!
+                        </h1>
                     </div>
-                    :
-
-                    selectedNewsData.map((news, index) => (
-                        <div
-                            className='flex items-center gap-4 p-2 my-5'
-                            key={index + 1}
-                            onClick={() => {
-                                setSelectedNews(news); //menambahkan element yg diclick untuk detail
-                                setShowDetail(true); //menampilkan detail
-                            }}
-                        >
-                            <div className='w-9/12'>
-                                <h1 className='text-xs text-blue-700 font-bold'>{news.source.name}</h1>
-                                <p className='text-sm font-bold'>{news.title}</p>
-                            </div>
-                            <div className='bg-slate-300 object-cover rounded-md' style={{ width: '200px', height: '100px' }}>
-                                <img src={news.urlToImage} alt={news.title} className='object-cover w-full h-full rounded-md' />
-                            </div>
-
-
-                        </div>
-
-
-                    ))}
+                ) : (
+                    <>
+                        {!showDetail &&
+                            selectedNewsData.map((news, index) => (
+                                <div
+                                    className="flex items-center gap-4 p-2 my-5"
+                                    key={index + 1}
+                                    onClick={() => {
+                                        setSelectedNews(news); // Menambahkan elemen yang di-klik untuk detail
+                                        setShowDetail(true); // Menampilkan detail
+                                    }}
+                                >
+                                    <div className="w-9/12">
+                                        <h1 className="text-xs text-blue-700 font-bold">
+                                            {news.source.name}
+                                        </h1>
+                                        <p className="text-sm font-bold">{news.title}</p>
+                                    </div>
+                                    <div
+                                        className="bg-slate-300 object-cover rounded-md"
+                                        style={{ width: '200px', height: '100px' }}
+                                    >
+                                        <img
+                                            src={news.urlToImage}
+                                            alt={news.title}
+                                            className="object-cover w-full h-full rounded-md"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                    </>
+                )}
             </div>
+
         </>
     )
 }
