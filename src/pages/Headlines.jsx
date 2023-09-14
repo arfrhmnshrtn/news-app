@@ -4,6 +4,7 @@ import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { Helmet } from 'react-helmet';
 
 export default function Headlines() {
 
@@ -88,6 +89,11 @@ export default function Headlines() {
     }, [news])
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Headline</title>
+            </Helmet>
+
             {loading ?
 
                 <div className='m-3 container mx-auto'>

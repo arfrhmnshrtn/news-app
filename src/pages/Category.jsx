@@ -5,6 +5,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { Helmet } from 'react-helmet';
 
 export default function Busines() {
 
@@ -90,6 +91,11 @@ export default function Busines() {
 
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Category | {id}</title>
+            </Helmet>
+
             {loading ?
 
 

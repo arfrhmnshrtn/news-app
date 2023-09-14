@@ -5,6 +5,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { Helmet } from "react-helmet";
 
 export default function Home() {
     const [news, setNews] = useState([]); //isi berita terkini
@@ -42,6 +43,12 @@ export default function Home() {
 
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>NgeNews</title>
+                {/* <link rel="canonical" href="http://mysite.com/example" /> */}
+            </Helmet>
+
             {/* <DataContext.Provider value={{ selectedNews, setSelectedNews }}> */}
             {loading ?
 
@@ -126,13 +133,13 @@ export default function Home() {
                                                         // Hapus item jika sudah ada
                                                         existingData.splice(indexToRemove, 1);
                                                         setTitleBookmark('Bookmark');
-                                                        setIconBookmark(<BookmarkAddOutlinedIcon/>)
+                                                        setIconBookmark(<BookmarkAddOutlinedIcon />)
 
                                                     } else {
                                                         // Tambahkan item jika belum ada
                                                         existingData.push(selectedNews);
                                                         setTitleBookmark('Unbookmark')
-                                                        setIconBookmark(<BookmarkIcon/>)
+                                                        setIconBookmark(<BookmarkIcon />)
                                                     }
 
                                                     localStorage.setItem('selectedNews', JSON.stringify(existingData));

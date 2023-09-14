@@ -5,6 +5,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkAddOutlinedIcon from '@mui/icons-material/BookmarkAddOutlined';
+import { Helmet } from "react-helmet";
+
 
 export default function Boomark() {
     const selectedNewsData = JSON.parse(localStorage.getItem('selectedNews'));
@@ -24,6 +26,10 @@ export default function Boomark() {
 
     return (
         <>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Bookmark</title>
+            </Helmet>
 
             <div className="container mx-auto">
                 {/* detail berita */}
