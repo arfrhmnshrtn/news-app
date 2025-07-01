@@ -24,7 +24,7 @@ export default function Home() {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await fetch('https://newsapi.org/v2/everything?q=keyword&apiKey=fca63b749f3645eba38309c8b8569349');
+                const response = await fetch('https://newsapi.org/v2/everything?q=bitcoin&apiKey=fca63b749f3645eba38309c8b8569349');
                 const data = await response.json();
                 setNews(data.articles);
                 setLoading(true)
