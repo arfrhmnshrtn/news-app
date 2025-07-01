@@ -52,7 +52,7 @@ export default function Home() {
             {/* <DataContext.Provider value={{ selectedNews, setSelectedNews }}> */}
             {loading ?
 
-                <div className='m-3 container mx-auto'>
+                <div className='mt-5 container mx-auto '>
                     {/* bagian banner utama */}
                     <div className='cursor-pointer'>
                         {news.length > 0 && (

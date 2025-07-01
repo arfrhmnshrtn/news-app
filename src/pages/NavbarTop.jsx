@@ -80,7 +80,7 @@ export default function NavbarTop() {
 
     return (
         <>
-            <div className='container mx-auto'>
+            <div className='container mx-auto '>
                 <div>
                     <div className="flex justify-between  px-3 py-4 mt-3 relative">
                         <div>

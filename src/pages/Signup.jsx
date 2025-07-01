@@ -7,7 +7,7 @@ export default function Signup() {
     const [hintPassword, setHintPassword] = useState(true);
 
     return (
-        <div className='container mx-auto h-screen flex items-center justify-center bg-slate-100 flex-col'>
+        <div className='container mx-auto h-screen flex items-center justify-center flex-col'>
             <div className='flex flex-col justify-center w-full px-4'>
                 <h1 className='text-2xl font-bold text-center mb-5 text-blue-700'>SIGN UP</h1>
                 <form action="" className='flex flex-col'>
