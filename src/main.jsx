@@ -12,15 +12,15 @@ import Home from './pages/Home.jsx';
 import Headlines from './pages/Headlines.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Business from './pages/Category.jsx';
-import Profile from './pages/profile.jsx';
+import Profile from './pages/Profile.jsx';
 import Search from './pages/Search.jsx';
 import Signup from './pages/Signup.jsx';
-import  Bookmark  from './pages/Bookmark.jsx';
+import Bookmark from './pages/Bookmark.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <NavbarTop /> 
+    <NavbarTop />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/headlines" element={<Headlines />} />
